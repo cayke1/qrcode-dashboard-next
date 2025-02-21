@@ -9,13 +9,19 @@ import { motion } from "framer-motion";
 import { Link } from "@/components/Link";
 
 type formType = "url" | "image";
+interface LinkType {
+  id: string;
+  slug: string;
+  url: string;
+  active: boolean;
+}
 
 export default function Dashboard() {
   const [form, setForm] = useState<formType>("url");
   const [url, setUrl] = useState<string>("https://");
   const [title, setTitle] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
-  const [links, setLinks] = useState<any[]>([]);
+  const [links, setLinks] = useState<LinkType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleToggle = () => {
@@ -55,7 +61,7 @@ export default function Dashboard() {
               method: "POST",
               body: JSON.stringify({ title, image: data.url }),
             });
-          } catch (err: any) {
+          } catch (err: unknown) {
             console.error("Error submitting image", err);
             throw err;
           }

@@ -35,6 +35,7 @@ export const FileUpload = ({
 
   const handleFileChange = (newFile: File | null) => {
     setFile(newFile);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     onChange && onChange(newFile);
   };
 
