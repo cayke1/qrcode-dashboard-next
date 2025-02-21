@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/components/Link";
+import { Loader2 } from "lucide-react";
 
 type formType = "url" | "image";
 interface LinkType {
@@ -172,7 +173,13 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {loading && <p className="text-white">Loading...</p>}
+        {loading && (
+          <div 
+          className="animate-spin flex items-center justify-center text-white"
+          >
+            <Loader2 size={64} />
+          </div>
+        )}
 
         {links.length > 0 && (
           <div className="w-full max-w-lg mt-6 flex flex-col gap-2">

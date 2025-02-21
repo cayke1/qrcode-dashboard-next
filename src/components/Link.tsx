@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { motion } from "framer-motion";
 
 interface LinkProps {
   id: string;
@@ -15,7 +16,13 @@ export function Link({
   deleteLink,
 }: LinkProps) {
   return (
-    <div className="flex justify-between gap-4 w-full items-center border border-slate-500 rounded-md drop-shadow-sm px-4 py-2">
+    <motion.div
+      className="flex justify-between gap-4 w-full items-center border border-slate-500 rounded-md drop-shadow-sm px-4 py-2"
+      initial={{ opacity: 0, scale: 0.8, x: -70 }}
+      animate={{ opacity: 1, scale: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
+      exit={{ opacity: 0 }}
+    >
       <h2 className="font-bol text-lg text-black">{title}</h2>
       <div className="flex gap-2 justify-center items-center p-2">
         <button
@@ -37,6 +44,6 @@ export function Link({
           Deletar
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
