@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/components/Link";
-import { Loader2 } from "lucide-react";
+import { Loader2, Plus, Link2, Image as ImageIcon } from "lucide-react";
 
 type formType = "url" | "image";
 interface LinkType {
@@ -103,98 +103,128 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="bg-slate-700 w-full h-screen flex items-center justify-center">
-      <div className="w-full md:w-2/3 bg-gray-400 px-6 py-8 flex flex-col gap-6 justify-center items-center rounded-lg shadow-lg">
-        <div className="flex flex-col gap-4 w-full max-w-lg">
-          <Label htmlFor="title">Title</Label>
-          <Input
-            id="title"
-            type="text"
-            placeholder="Enter title"
-            onInput={(e) => setTitle(e.currentTarget.value)}
-            value={title}
-            className="w-full p-3 border-2 border-gray-300 rounded-md"
-          />
-        </div>
-
-        {form === "image" && (
-          <motion.div
-            className="w-full max-w-lg bg-gray-200 p-6 rounded-md shadow-sm flex justify-center items-center"
-            initial={{ opacity: 0, scale: 0.8, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            exit={{ opacity: 0, scale: 0.8, y: -20 }}
-          >
-            <FileUpload onChange={(file) => setImage(file)} />
-          </motion.div>
-        )}
-
-        {form === "url" && (
-          <motion.div
-            className="flex flex-col gap-4 w-full max-w-lg"
-            initial={{ opacity: 0, scale: 0.8, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            exit={{ opacity: 0, scale: 0.8, y: -20 }}
-          >
-            <Label htmlFor="url">URL</Label>
-            <Input
-              id="url"
-              type="text"
-              placeholder="Enter URL"
-              defaultValue="https://"
-              onInput={(e) => setUrl(e.currentTarget.value)}
-              value={url}
-              className="w-full p-3 border-2 border-gray-300 rounded-md"
-            />
-          </motion.div>
-        )}
-
-        <div className="flex justify-center items-center gap-4 mt-6">
-          <Toggle
-            className={clsx(
-              "p-3 rounded-full transition-colors duration-300",
-              form === "image" ? "bg-green-500" : "bg-blue-500"
-            )}
-            onClick={handleToggle}
-            value={form}
-          >
-            {form === "image" ? "Switch to URL" : "Switch to Image"}
-          </Toggle>
-
-          <button
-            className="bg-blue-500 px-4 py-2 rounded-2xl shadow-md disabled:opacity-50"
-            onClick={handleSubmit}
-            disabled={loading}
-          >
-            <span className="text-white">
-              {loading ? "Loading..." : "Submit"}
-            </span>
-          </button>
-        </div>
-
-        {loading && (
-          <div 
-          className="animate-spin flex items-center justify-center text-white"
-          >
-            <Loader2 size={64} />
-          </div>
-        )}
-
-        {links.length > 0 && (
-          <div className="w-full max-w-lg mt-6 flex flex-col gap-2">
-            {links.map((link) => (
-              <Link
-                key={link.id}
-                id={link.id}
-                title={link.slug}
-                isActive={link.active}
-                setActive={handleSetActive}
-                deleteLink={handleDeleteLink}
+    <div className="bg-gradient-to-br from-slate-800 to-slate-900 min-h-screen w-full flex items-center justify-center p-0 sm:p-4">
+      <div className="w-full h-full min-h-screen sm:min-h-0 sm:h-auto sm:max-h-[90vh] md:w-2/3 lg:w-3/5 bg-white dark:bg-slate-800 px-4 sm:px-6 py-6 sm:py-8 flex flex-col gap-6 justify-start sm:justify-center items-center rounded-none sm:rounded-xl shadow-none sm:shadow-2xl overflow-y-auto">
+        <div className="w-full max-w-lg">
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-6 text-center">
+            QR Code Dashboard
+          </h1>
+          
+          <div className="bg-slate-50 dark:bg-slate-700 p-4 sm:p-6 rounded-xl shadow-md mb-8">
+            <div className="flex flex-col gap-4 w-full">
+              <Label htmlFor="title" className="text-slate-700 dark:text-slate-200 font-medium">
+                Título
+              </Label>
+              <Input
+                id="title"
+                type="text"
+                placeholder="Digite o título"
+                onInput={(e) => setTitle(e.currentTarget.value)}
+                value={title}
+                className="w-full p-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
               />
-            ))}
+            </div>
+
+            {form === "image" && (
+              <motion.div
+                className="w-full bg-slate-100 dark:bg-slate-600 p-4 sm:p-6 rounded-xl shadow-sm flex justify-center items-center mt-4"
+                initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                exit={{ opacity: 0, scale: 0.8, y: -20 }}
+              >
+                <FileUpload onChange={(file) => setImage(file)} />
+              </motion.div>
+            )}
+
+            {form === "url" && (
+              <motion.div
+                className="flex flex-col gap-4 w-full mt-4"
+                initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                exit={{ opacity: 0, scale: 0.8, y: -20 }}
+              >
+                <Label htmlFor="url" className="text-slate-700 dark:text-slate-200 font-medium">
+                  URL
+                </Label>
+                <Input
+                  id="url"
+                  type="text"
+                  placeholder="Digite a URL"
+                  defaultValue="https://"
+                  onInput={(e) => setUrl(e.currentTarget.value)}
+                  value={url}
+                  className="w-full p-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+                />
+              </motion.div>
+            )}
+
+            <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 mt-6">
+              <Toggle
+                className={clsx(
+                  "p-3 rounded-lg transition-all duration-300 flex items-center gap-2 font-medium w-full sm:w-auto justify-center",
+                  form === "image" 
+                    ? "bg-purple-500 hover:bg-purple-600 text-white" 
+                    : "bg-blue-500 hover:bg-blue-600 text-white"
+                )}
+                onClick={handleToggle}
+                value={form}
+              >
+                {form === "image" 
+                  ? <><Link2 size={18} /> Mudar para URL</> 
+                  : <><ImageIcon size={18} /> Mudar para Imagem</>}
+              </Toggle>
+
+              <button
+                className={clsx(
+                  "bg-emerald-500 hover:bg-emerald-600 px-5 py-2.5 rounded-lg shadow-md disabled:opacity-50 transition-colors flex items-center gap-2 text-white font-medium w-full sm:w-auto justify-center"
+                )}
+                onClick={handleSubmit}
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    Processando...
+                  </>
+                ) : (
+                  <>
+                    <Plus size={18} />
+                    Adicionar
+                  </>
+                )}
+              </button>
+            </div>
           </div>
-        )}
+
+          {loading && !links.length && (
+            <div className="flex items-center justify-center py-8">
+              <Loader2 size={48} className="animate-spin text-blue-500" />
+            </div>
+          )}
+
+          {links.length > 0 && (
+            <div className="w-full mt-6 pb-6 sm:pb-0">
+              <h2 className="text-xl font-semibold text-slate-700 dark:text-white mb-4">
+                Seus Links ({links.length})
+              </h2>
+              <div className="flex flex-col gap-3">
+                {links.map((link) => (
+                  <Link
+                    key={link.id}
+                    id={link.id}
+                    title={link.slug}
+                    isActive={link.active}
+                    totalLinks={links.length}
+                    setActive={handleSetActive}
+                    deleteLink={handleDeleteLink}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
