@@ -22,26 +22,26 @@ export function Link({
   
   return (
     <motion.div
-      className="flex flex-col sm:flex-row justify-between gap-3 w-full items-start sm:items-center bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg shadow-sm px-4 py-3 hover:shadow-md transition-all"
+      className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-3 w-full items-start sm:items-center bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg shadow-sm px-3 sm:px-4 py-2.5 sm:py-3 hover:shadow-md transition-all"
       initial={{ opacity: 0, scale: 0.95, y: -10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       exit={{ opacity: 0 }}
     >
-      <div className="flex items-center gap-2 w-full sm:w-auto">
+      <div className="flex items-center gap-2 w-full sm:w-auto min-w-0">
         <div className={clsx(
           "w-2 h-2 rounded-full flex-shrink-0",
           isActive ? "bg-emerald-500" : "bg-slate-300 dark:bg-slate-500"
         )} />
-        <h2 className="font-medium text-slate-800 dark:text-slate-100 truncate">{title}</h2>
+        <h2 className="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-100 truncate">{title}</h2>
       </div>
-      
+
       <div className="flex gap-2 justify-start sm:justify-center items-center w-full sm:w-auto">
         <button
           className={clsx(
-            "flex items-center gap-1 px-3 py-1.5 rounded-md text-white text-sm font-medium transition-colors flex-1 sm:flex-auto justify-center",
-            isActive 
-              ? "bg-slate-400 dark:bg-slate-500 cursor-not-allowed" 
+            "flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-md text-white text-xs sm:text-sm font-medium transition-colors flex-1 sm:flex-auto justify-center min-w-0",
+            isActive
+              ? "bg-slate-400 dark:bg-slate-500 cursor-not-allowed"
               : "bg-emerald-500 hover:bg-emerald-600"
           )}
           onClick={() => setActive(id)}
@@ -61,9 +61,9 @@ export function Link({
         </button>
         <button
           className={clsx(
-            "px-3 py-1.5 rounded-md text-white text-sm font-medium transition-colors flex items-center gap-1 flex-1 sm:flex-auto justify-center",
-            isOnlyLink 
-              ? "bg-red-300 dark:bg-red-800 cursor-not-allowed" 
+            "px-2.5 sm:px-3 py-1.5 rounded-md text-white text-xs sm:text-sm font-medium transition-colors flex items-center gap-1 flex-1 sm:flex-auto justify-center min-w-0",
+            isOnlyLink
+              ? "bg-red-300 dark:bg-red-800 cursor-not-allowed"
               : "bg-red-500 hover:bg-red-600"
           )}
           onClick={() => !isOnlyLink && deleteLink(id)}
