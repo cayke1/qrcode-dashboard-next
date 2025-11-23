@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/components/Link";
 import { Loader2, Plus, Link2, Image as ImageIcon } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type formType = "url" | "image";
 interface LinkType {
@@ -103,16 +104,17 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-800 to-slate-900 min-h-screen w-full flex items-center justify-center p-0 sm:p-4">
-      <div className="w-full h-full min-h-screen sm:min-h-0 sm:h-auto sm:max-h-[90vh] md:w-2/3 lg:w-3/5 bg-white dark:bg-slate-800 px-4 sm:px-6 py-6 sm:py-8 flex flex-col gap-6 justify-start sm:justify-center items-center rounded-none sm:rounded-xl shadow-none sm:shadow-2xl overflow-y-auto">
+    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-indigo-950 dark:to-purple-950 min-h-screen w-full flex items-center justify-center p-0 sm:p-4">
+      <ThemeToggle />
+      <div className="w-full h-full min-h-screen sm:min-h-0 sm:h-auto sm:max-h-[90vh] md:w-2/3 lg:w-3/5 bg-white dark:bg-slate-800 px-3 sm:px-6 py-4 sm:py-8 flex flex-col gap-4 sm:gap-6 justify-start sm:justify-center items-center rounded-none sm:rounded-xl shadow-none sm:shadow-2xl overflow-y-auto">
         <div className="w-full max-w-lg">
-          <h1 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-6 text-center">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-4 sm:mb-6 text-center">
             QR Code Dashboard
           </h1>
-          
-          <div className="bg-slate-50 dark:bg-slate-700 p-4 sm:p-6 rounded-xl shadow-md mb-8">
-            <div className="flex flex-col gap-4 w-full">
-              <Label htmlFor="title" className="text-slate-700 dark:text-slate-200 font-medium">
+
+          <div className="bg-slate-50 dark:bg-slate-700 p-3 sm:p-6 rounded-xl shadow-md mb-4 sm:mb-8">
+            <div className="flex flex-col gap-3 sm:gap-4 w-full">
+              <Label htmlFor="title" className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">
                 Título
               </Label>
               <Input
@@ -121,13 +123,13 @@ export default function Dashboard() {
                 placeholder="Digite o título"
                 onInput={(e) => setTitle(e.currentTarget.value)}
                 value={title}
-                className="w-full p-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+                className="w-full p-2 sm:p-3 text-sm sm:text-base border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
               />
             </div>
 
             {form === "image" && (
               <motion.div
-                className="w-full bg-slate-100 dark:bg-slate-600 p-4 sm:p-6 rounded-xl shadow-sm flex justify-center items-center mt-4"
+                className="w-full bg-slate-100 dark:bg-slate-600 p-3 sm:p-6 rounded-xl shadow-sm flex justify-center items-center mt-3 sm:mt-4"
                 initial={{ opacity: 0, scale: 0.8, y: -20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -139,13 +141,13 @@ export default function Dashboard() {
 
             {form === "url" && (
               <motion.div
-                className="flex flex-col gap-4 w-full mt-4"
+                className="flex flex-col gap-3 sm:gap-4 w-full mt-3 sm:mt-4"
                 initial={{ opacity: 0, scale: 0.8, y: -20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 exit={{ opacity: 0, scale: 0.8, y: -20 }}
               >
-                <Label htmlFor="url" className="text-slate-700 dark:text-slate-200 font-medium">
+                <Label htmlFor="url" className="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium">
                   URL
                 </Label>
                 <Input
@@ -155,42 +157,42 @@ export default function Dashboard() {
                   defaultValue="https://"
                   onInput={(e) => setUrl(e.currentTarget.value)}
                   value={url}
-                  className="w-full p-3 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+                  className="w-full p-2 sm:p-3 text-sm sm:text-base border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
                 />
               </motion.div>
             )}
 
-            <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-3 sm:gap-4 mt-4 sm:mt-6">
               <Toggle
                 className={clsx(
-                  "p-3 rounded-lg transition-all duration-300 flex items-center gap-2 font-medium w-full sm:w-auto justify-center",
-                  form === "image" 
-                    ? "bg-purple-500 hover:bg-purple-600 text-white" 
+                  "p-2.5 sm:p-3 rounded-lg transition-all duration-300 flex items-center gap-2 text-sm sm:text-base font-medium w-full sm:w-auto justify-center",
+                  form === "image"
+                    ? "bg-purple-500 hover:bg-purple-600 text-white"
                     : "bg-blue-500 hover:bg-blue-600 text-white"
                 )}
                 onClick={handleToggle}
                 value={form}
               >
-                {form === "image" 
-                  ? <><Link2 size={18} /> Mudar para URL</> 
-                  : <><ImageIcon size={18} /> Mudar para Imagem</>}
+                {form === "image"
+                  ? <><Link2 size={16} className="sm:w-[18px] sm:h-[18px]" /> Mudar para URL</>
+                  : <><ImageIcon size={16} className="sm:w-[18px] sm:h-[18px]" /> Mudar para Imagem</>}
               </Toggle>
 
               <button
                 className={clsx(
-                  "bg-emerald-500 hover:bg-emerald-600 px-5 py-2.5 rounded-lg shadow-md disabled:opacity-50 transition-colors flex items-center gap-2 text-white font-medium w-full sm:w-auto justify-center"
+                  "bg-emerald-500 hover:bg-emerald-600 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg shadow-md disabled:opacity-50 transition-colors flex items-center gap-2 text-white text-sm sm:text-base font-medium w-full sm:w-auto justify-center"
                 )}
                 onClick={handleSubmit}
                 disabled={loading}
               >
                 {loading ? (
                   <>
-                    <Loader2 size={18} className="animate-spin" />
+                    <Loader2 size={16} className="sm:w-[18px] sm:h-[18px] animate-spin" />
                     Processando...
                   </>
                 ) : (
                   <>
-                    <Plus size={18} />
+                    <Plus size={16} className="sm:w-[18px] sm:h-[18px]" />
                     Adicionar
                   </>
                 )}
@@ -199,17 +201,17 @@ export default function Dashboard() {
           </div>
 
           {loading && !links.length && (
-            <div className="flex items-center justify-center py-8">
-              <Loader2 size={48} className="animate-spin text-blue-500" />
+            <div className="flex items-center justify-center py-6 sm:py-8">
+              <Loader2 size={36} className="sm:w-12 sm:h-12 animate-spin text-blue-500" />
             </div>
           )}
 
           {links.length > 0 && (
-            <div className="w-full mt-6 pb-6 sm:pb-0">
-              <h2 className="text-xl font-semibold text-slate-700 dark:text-white mb-4">
+            <div className="w-full mt-4 sm:mt-6 pb-20 sm:pb-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-700 dark:text-white mb-3 sm:mb-4">
                 Seus Links ({links.length})
               </h2>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2 sm:gap-3">
                 {links.map((link) => (
                   <Link
                     key={link.id}
